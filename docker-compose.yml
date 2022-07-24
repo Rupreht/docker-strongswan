@@ -1,0 +1,18 @@
+version: '2'
+services:
+  strongswan:
+    image: vimagick/strongswan:latest
+    ports:
+      - 500:500/udp
+      - 4500:4500/udp
+    volumes:
+      - /lib/modules:/lib/modules:ro
+      - /etc/localtime:/etc/localtime:ro
+      - config:/etc/ipsec.d
+    env_file:
+      - .env
+    tmpfs: /run
+    privileged: yes
+    restart: always
+volumes:
+  config: {}
