@@ -1,7 +1,8 @@
 version: '2'
 services:
   strongswan:
-    image: vimagick/strongswan:latest
+    # image: vimagick/strongswan:latest
+    build: ./app
     ports:
       - 500:500/udp
       - 4500:4500/udp
@@ -9,6 +10,7 @@ services:
       - /lib/modules:/lib/modules:ro
       - /etc/localtime:/etc/localtime:ro
       - config:/etc/ipsec.d
+      - config_strw:/etc/strongswan.d
     env_file:
       - .env
     tmpfs: /run
@@ -16,3 +18,4 @@ services:
     restart: always
 volumes:
   config: {}
+  config_strw: {}
